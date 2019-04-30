@@ -24,16 +24,15 @@ class SignIn extends Component{
         return (
             <div className="container sign-in-container mt-5">
                 <form className="form-signin" onSubmit={this.handleSubmit}>
-                    <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
+                    <h1 className="h3 mb-3 text-center font-weight-normal">BioMed</h1>
                     <label htmlFor="email" className="sr-only">Email address</label>
-                    <input type="email" id="email" onChange={this.handleChange} className="form-control" placeholder="Email address" required/>
+                    <input type="email" id="email" onChange={this.handleChange} className="form-control mb-1" placeholder="Email address" required/>
                     <label htmlFor="password" className="sr-only">Password</label>
-                    <input type="password" id="password" onChange={this.handleChange} className="form-control" placeholder="Password" required/>
-
-                    <button className="btn btn-lg btn-primary btn-block mt-2" type="submit">Sign in</button>
+                    <input type="password" id="password" onChange={this.handleChange} className="form-control mb-2" placeholder="Password" required/>
                     <div className='text-center'>
                         {authError ? <p className='alert alert-danger mt-2'>{authError}</p> : null}
                     </div>
+                    <button className="btn btn-lg btn-primary btn-block mt-2" type="submit">Sign in</button>
                     <p className="mt-5 mb-3 text-muted">&copy; Radu Roman & Andrei Miklos</p>
                 </form>
             </div>

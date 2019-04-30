@@ -1,13 +1,22 @@
-const initState = {};
+const initState = {
+    authError: null
+};
 
 const patientReducer = (state = initState, action) => {
     switch (action.type) {
         case 'CREATE_PATIENT':
             console.log('patient created!', action);
-            return state;
+            return {
+                ...state,
+                authError: null
+            };
         case 'CREATE_PATIENT_ERROR':
             console.log('create patient error', action.err);
-            return state;
+
+            return {
+                ...state,
+                authError: action.err.message
+            };
         default:
             return state;
     }

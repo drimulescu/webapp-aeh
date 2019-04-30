@@ -1,5 +1,6 @@
 import React from 'react'
 import PatientSummary from './PatientSummary'
+import {connect} from 'react-redux'
 
 const PatientsList = ({patients}) => {
 
@@ -7,12 +8,20 @@ const PatientsList = ({patients}) => {
         <div className="patient-list">
             {patients && patients.map(patient => {
                 return (
-                    <PatientSummary patient = {patient} key={patient.id} />
+                    <PatientSummary patient={patient} key={patient.id}/>
                 )
-            } )
-        }
+            })
+            }
         </div>
     )
 };
 
-export default PatientsList
+
+const mapStateToProps = (state) => {
+    return {
+        auth: state.firebase.auth,
+        profile: state.firebase.profile
+    }
+};
+
+export default connect(mapStateToProps)(PatientsList)

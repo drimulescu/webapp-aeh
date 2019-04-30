@@ -9,7 +9,8 @@ class CreatePatient extends Component {
         lastName: '',
         address: '',
         email: '',
-        password: ''
+        password: '',
+        doctorId: ''
     };
 
     handleChange = (e) => {
@@ -20,12 +21,19 @@ class CreatePatient extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.createPatient(this.state);
-        this.props.history.push('/');
+        const {auth} = this.props;
+        this.setState({doctorId : auth.uid}, () => {
+            this.props.createPatient(this.state).then((resp) => {
+                if(resp){
+                    this.props.history.push('/')
+                }
+            });
+        });
+
     };
 
     render() {
-        const {auth} = this.props;
+        const {auth, authError} = this.props;
         if(!auth.uid) return <Redirect to='/signin' />;
         return (
             <div className="container mt-5 border border-secondary">
@@ -34,17 +42,17 @@ class CreatePatient extends Component {
                     <div className="form-group">
                         <label htmlFor="firstName">First name</label>
                         <input type="text" className="form-control" id="firstName" onChange={this.handleChange}
-                               placeholder="Enter first name"/>
+                               placeholder="Enter first name" required/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="lastName">Last name</label>
                         <input type="text" className="form-control" id="lastName" onChange={this.handleChange}
-                               placeholder="Enter last name"/>
+                               placeholder="Enter last name" required/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="address">Address</label>
                         <input type="text" className="form-control" id="address" onChange={this.handleChange}
-                               placeholder="Enter address"/>
+                               placeholder="Enter address" required/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="email">Email</label>
@@ -56,6 +64,9 @@ class CreatePatient extends Component {
                         <input type="password" className="form-control" id="password" onChange={this.handleChange}
                                placeholder="Enter password"/>
                     </div>
+                    <div className='text-center'>
+                        {authError ? <p className='alert alert-danger mt-2'>{authError}</p> : null}
+                    </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
                 </form>
             </div>
@@ -65,7 +76,8 @@ class CreatePatient extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        authError: state.patient.authError
     }
 };
 
