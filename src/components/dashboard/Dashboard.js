@@ -1,36 +1,46 @@
-import React,{Component} from "react";
+import React, {Component} from "react";
 import Notifications from './Notifications'
 import PatientsList from '../patients/PatientsList'
-import { connect } from 'react-redux'
+import {connect} from 'react-redux'
 import {firestoreConnect} from "react-redux-firebase"
 import {compose} from 'redux'
 import {Redirect} from 'react-router-dom'
 
 class Dashboard extends Component {
     render() {
-        const { patients, auth } = this.props;
-        if(!auth.uid) return <Redirect to='/signin' />;
+        const { filteredPatients, auth } = this.props;
+        if (!auth.uid) return <Redirect to='/signin' />;
 
-        return(
+        return (
             <div className='container mt-5'>
                 <div className='row'>
                     <div className="col-md-6">
-                        <PatientsList patients = {patients}/>
+                        <PatientsList patients = {filteredPatients}/>
                     </div>
                     <div className="col-md-6">
                         <Notifications/>
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 
 const mapStateToProps = (state) => {
-  return{
-      patients: state.firestore.ordered.patients,
-      auth: state.firebase.auth
-  }
+    const authId = state.firebase.auth.uid;
+    const patients = state.firestore.ordered.patients;
+    let filteredPatients = [];
+    if (patients !== undefined) {
+        filteredPatients = patients.filter(patient => {
+            return patient.doctorId === authId;
+        })
+    }
+    return {
+        patients: patients,
+        filteredPatients: filteredPatients,
+        auth: state.firebase.auth,
+        profile: state.firebase.profile
+    }
 };
 
 export default compose(
