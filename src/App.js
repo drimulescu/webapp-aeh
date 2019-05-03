@@ -5,6 +5,7 @@ import Dashboard from './components/dashboard/Dashboard'
 import PatientDetails from './components/patients/PatientDetails'
 import SignIn from './components/auth/SignIn'
 import CreatePatient from './components/patients/CreatePatient'
+import PatientUpdate from './components/patients/PatientUpdate'
 import {connect} from 'react-redux'
 
 class App extends Component {
@@ -17,6 +18,7 @@ class App extends Component {
                     <Switch>
                         <Route exact path='/' component={Dashboard}/>
                         <Route path='/patient/:id' component={PatientDetails}/>
+                        <Route path='/update/patient/:id' component={PatientUpdate}/>
                         <Route path='/signin' component={SignIn}/>
                         <Route path='/createPatient' component={CreatePatient}/>
                     </Switch>

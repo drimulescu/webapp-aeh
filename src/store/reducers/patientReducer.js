@@ -1,5 +1,6 @@
 const initState = {
-    authError: null
+    authError: null,
+    updateError: null
 };
 
 const patientReducer = (state = initState, action) => {
@@ -16,6 +17,18 @@ const patientReducer = (state = initState, action) => {
             return {
                 ...state,
                 authError: action.err.message
+            };
+        case 'UPDATE_PATIENT':
+            console.log('update', action);
+            return {
+                ...state,
+                updateError: null
+            };
+        case 'UPDATE_PATIENT_ERROR':
+            console.log('update patient error', action.err);
+            return {
+                ...state,
+                updateError: action.err.message
             };
         default:
             return state;

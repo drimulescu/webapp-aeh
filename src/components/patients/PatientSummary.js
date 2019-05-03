@@ -2,7 +2,7 @@ import React from 'react'
 import {Link} from "react-router-dom";
 
 const PatientSummary = ({patient}) => {
-
+    console.log(patient);
     return (
         <div className="card bg-light mb-3">
             <div className="card-body">
