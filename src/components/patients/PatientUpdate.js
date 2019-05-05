@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {firestoreConnect} from "react-redux-firebase"
 import {compose} from 'redux'
 import {updatePatient} from '../../store/actions/patientActions'
+import {Link} from "react-router-dom";
 
 class PatientUpdate extends Component {
     state = {};
@@ -27,10 +28,10 @@ class PatientUpdate extends Component {
     };
 
     render() {
-        const {patient} = this.props;
+        const {patient, updateError} = this.props;
         if (patient) {
             return (
-                <div className="container mt-5">
+                <div className="container mt-5 border border-secondary">
                     <form onSubmit={this.handleSubmit} className="p-5">
                         <h3 className='mb-4'>Update patient</h3>
                         <div className="form-group">
@@ -64,12 +65,19 @@ class PatientUpdate extends Component {
                                        onChange={this.handleChange}
                                        placeholder={patient.maxValue}/>
                             </div>
+                            <div className='form-group col-md-12'>
+                                <label htmlFor="recommendations">Activity recommendation</label>
+                                <textarea type="text" className="form-control" id="recommendations"
+                                       onChange={this.handleChange}
+                                       placeholder={patient.recommendations}/>
+                            </div>
                         </div>
 
-                        {/*<div className='text-center'>*/}
-                        {/*{authError ? <p className='alert alert-danger mt-2'>{authError}</p> : null}*/}
-                        {/*</div>*/}
+                        <div className='text-center'>
+                            {updateError ? <p className='alert alert-danger mt-2'>{updateError}</p> : null}
+                        </div>
                         <button type="submit" className="btn btn-primary">Submit</button>
+                        <Link to={'/patient/' + patient.id} className='btn btn-danger ml-2'>Cancel</Link>
                     </form>
                 </div>
             )
@@ -91,7 +99,8 @@ const mapStateToProps = (state, ownProps) => {
         return patient.id === id;
     })) : null;
     return {
-        patient: patient
+        patient: patient,
+        updateError: state.patient.updateError
     }
 };
 
