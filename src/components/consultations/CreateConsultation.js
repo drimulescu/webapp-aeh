@@ -47,9 +47,9 @@ class CreateConsultation extends Component {
                                placeholder="Enter presentation reason" required/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="referral">Referral</label>
+                        <label htmlFor="referral">Referral (Trimitere)</label>
                         <input type="text" className="form-control" id="referral" onChange={this.handleChange}
-                               placeholder="Enter referral" required/>
+                               placeholder="Enter referral"/>
                     </div>
                     <div className="form-group">
                         <label htmlFor="symptoms">Symptoms</label>

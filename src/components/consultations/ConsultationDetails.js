@@ -14,10 +14,16 @@ const ConsultationDetails = ({consultation}) => {
             <div className="container mt-5 ">
                 <div className="row">
                     <div className="col-md-6 offset-md-3 border border-secondary p-5">
+                        <h2 className='mb-3'>Consultation</h2>
+                        <span className='font-weight-bold'>Symptoms</span>
                         <p>{consultation.symptoms}</p>
+                        <span className='font-weight-bold'>Presentation reason</span>
                         <p>{consultation.presentationReason}</p>
+                        <span className='font-weight-bold'>Diagnostic</span>
                         <p>{consultation.diagnostic}</p>
-                        <p>{consultation.prescription}</p>
+                        <span className='font-weight-bold'>Prescription</span>
+                        {consultation.prescription ? (<p>{consultation.prescription}</p>) : (<p>-</p>)}
+                        <span className='font-weight-bold'>Referral</span>
                         <p>{consultation.referral}</p>
                         <p>{displayDate}</p>
                         <Link to={'/patient/' + consultation.patientId} className='btn btn-primary mt-3'>Back</Link>

@@ -9,6 +9,8 @@ import PatientUpdate from './components/patients/PatientUpdate'
 import {connect} from 'react-redux'
 import CreateConsultation from "./components/consultations/CreateConsultation";
 import ConsultationDetails from "./components/consultations/ConsultationDetails";
+import AlarmsList from './components/alarms/AlarmsList'
+import AlarmPopup from "./components/alarms/AlarmPopup";
 
 class App extends Component {
     render() {
@@ -16,7 +18,8 @@ class App extends Component {
         return (
             <BrowserRouter>
                 <div className='app'>
-                    { auth.uid ? <Navbar/> : null }
+                    { auth.uid ? (<Navbar/>) : null }
+                    { auth.uid ? (<AlarmPopup/>) : null}
                     <Switch>
                         <Route exact path='/' component={Dashboard}/>
                         <Route path='/patient/:id' component={PatientDetails}/>
@@ -25,10 +28,10 @@ class App extends Component {
                         <Route path='/createPatient' component={CreatePatient}/>
                         <Route path='/createConsultation/:id' component={CreateConsultation}/>
                         <Route path='/consultation/:id' component={ConsultationDetails}/>
+                        <Route path='/alarms' component={AlarmsList}/>
                     </Switch>
                 </div>
             </BrowserRouter>
-
         );
     }
 }

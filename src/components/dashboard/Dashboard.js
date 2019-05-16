@@ -1,30 +1,28 @@
-import React, {Component} from "react";
-import Notifications from './Notifications'
-import PatientsList from '../patients/PatientsList'
+import React from 'react'
 import {connect} from 'react-redux'
-import {firestoreConnect} from "react-redux-firebase"
-import {compose} from 'redux'
+import AdminDashboard from "./AdminDashboard";
 import {Redirect} from 'react-router-dom'
+import {compose} from "redux";
+import {firestoreConnect} from "react-redux-firebase";
 
-class Dashboard extends Component {
-    render() {
-        const { filteredPatients, auth } = this.props;
-        if (!auth.uid) return <Redirect to='/signin' />;
+const Dashboard = ({auth, role, filteredPatients}) => {
 
-        return (
-            <div className='container mt-5'>
-                <div className='row'>
-                    <div className="col-md-6">
-                        <PatientsList patients = {filteredPatients}/>
-                    </div>
-                    <div className="col-md-6">
-                        <Notifications/>
-                    </div>
+    if(!auth.uid) return <Redirect to='/signin' />;
+    switch (role) {
+        case 'admin':
+            return <AdminDashboard filteredPatients={filteredPatients}/>;
+        case 'user':
+            return <Redirect to={'/patient/' + auth.uid}/>;
+        default:
+            return (
+                <div className="spinner-border" role="status">
+                    <span className="sr-only">Loading...</span>
                 </div>
-            </div>
-        );
+            )
+
     }
-}
+
+};
 
 const mapStateToProps = (state) => {
     const authId = state.firebase.auth.uid;
@@ -35,11 +33,12 @@ const mapStateToProps = (state) => {
             return patient.doctorId === authId;
         })
     }
+
     return {
         patients: patients,
         filteredPatients: filteredPatients,
         auth: state.firebase.auth,
-        profile: state.firebase.profile
+        role: state.firebase.profile.role,
     }
 };
 

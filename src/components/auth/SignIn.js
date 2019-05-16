@@ -33,7 +33,7 @@ class SignIn extends Component{
                         {authError ? <p className='alert alert-danger mt-2'>{authError}</p> : null}
                     </div>
                     <button className="btn btn-lg btn-primary btn-block mt-2" type="submit">Sign in</button>
-                    <p className="mt-5 mb-3 text-muted">&copy; Radu Roman & Andrei Miklos</p>
+                    <p className="mt-5 mb-3 text-muted">&copy; Radu Roman</p>
                 </form>
             </div>
         )

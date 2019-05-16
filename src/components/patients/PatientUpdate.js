@@ -50,27 +50,52 @@ class PatientUpdate extends Component {
                                    placeholder={patient.address}/>
                         </div>
                         <div className='form-row'>
-                            <div className='form-group col-md-12'>
-                                <span>Heart rate values (min & max)</span>
-                            </div>
                             <div className="form-group col-md-6">
-                                <label htmlFor="minValue">min</label>
-                                <input type="text" className="form-control" id="minValue"
+                                <label htmlFor="heartMinValue">Heart rate min</label>
+                                <input type="text" className="form-control" id="heartMinValue"
                                        onChange={this.handleChange}
-                                       placeholder={patient.minValue}/>
+                                       placeholder={patient.heartMinValue}/>
                             </div>
                             <div className='form-group col-md-6'>
-                                <label htmlFor="maxValue">max</label>
-                                <input type="text" className="form-control" id="maxValue"
+                                <label htmlFor="heartMaxValue">Heart rate max</label>
+                                <input type="text" className="form-control" id="heartMaxValue"
                                        onChange={this.handleChange}
-                                       placeholder={patient.maxValue}/>
+                                       placeholder={patient.heartMaxValue}/>
                             </div>
-                            <div className='form-group col-md-12'>
-                                <label htmlFor="recommendations">Activity recommendation</label>
-                                <textarea type="text" className="form-control" id="recommendations"
+                        </div>
+                        <div className='form-row'>
+                            <div className="form-group col-md-6">
+                                <label htmlFor="tempMinValue">Temperature min</label>
+                                <input type="text" className="form-control" id="tempMinValue"
                                        onChange={this.handleChange}
-                                       placeholder={patient.recommendations}/>
+                                       placeholder={patient.tempMinValue}/>
                             </div>
+                            <div className='form-group col-md-6'>
+                                <label htmlFor="tempMaxValue">Temperature max</label>
+                                <input type="text" className="form-control" id="tempMaxValue"
+                                       onChange={this.handleChange}
+                                       placeholder={patient.tempMaxValue}/>
+                            </div>
+                        </div>
+                        <div className='form-row'>
+                            <div className="form-group col-md-6">
+                                <label htmlFor="humidityMinValue">Humidity min</label>
+                                <input type="text" className="form-control" id="humidityMinValue"
+                                       onChange={this.handleChange}
+                                       placeholder={patient.humidityMinValue}/>
+                            </div>
+                            <div className='form-group col-md-6'>
+                                <label htmlFor="humidityMaxValue">Humidity max</label>
+                                <input type="text" className="form-control" id="humidityMaxValue"
+                                       onChange={this.handleChange}
+                                       placeholder={patient.humidityMaxValue}/>
+                            </div>
+                        </div>
+                        <div className='form-group'>
+                            <label htmlFor="recommendations">Activity recommendation</label>
+                            <textarea type="text" className="form-control" id="recommendations"
+                                      onChange={this.handleChange}
+                                      placeholder={patient.recommendations}/>
                         </div>
 
                         <div className='text-center'>
