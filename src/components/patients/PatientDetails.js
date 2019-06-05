@@ -66,20 +66,18 @@ const PatientDetails = (props) => {
                                 <button className='btn btn-danger ml-2' onClick={() => props.deletePatient(patient)}>
                                     Delete user
                                 </button>
-                                <div className="btn-group mt-3" role="group" aria-label="First group">
-                                    <Link to={'/ekg/patient/' + patient.id}
-                                          className="card-link btn btn-secondary">Ekg</Link>
-                                    <Link to={'/pulse/patient/' + patient.id}
-                                          className="card-link btn btn-secondary">Pulse</Link>
-                                    <Link to={'/humidity/patient/' + patient.id}
-                                          className="card-link btn btn-secondary">Humidity</Link>
-                                    <Link to={'/temperature/patient/' + patient.id}
-                                          className="card-link btn btn-secondary">Temperature</Link>
-                                </div>
-
                             </div>
                         ) : null}
-
+                        <div className="btn-group mt-3" role="group" aria-label="First group">
+                            <Link to={'/ekg/patient/' + patient.id}
+                                  className="card-link btn btn-secondary">Ekg</Link>
+                            <Link to={'/pulse/patient/' + patient.id}
+                                  className="card-link btn btn-secondary">Pulse</Link>
+                            <Link to={'/humidity/patient/' + patient.id}
+                                  className="card-link btn btn-secondary">Humidity</Link>
+                            <Link to={'/temperature/patient/' + patient.id}
+                                  className="card-link btn btn-secondary">Temperature</Link>
+                        </div>
                     </div>
                     <div className="col-md-4 patient-consultations">
                         <h4 className='patient-details-title'>Consultations</h4>
