@@ -9,14 +9,13 @@ import AlarmSummary from '../alarms/AlarmSummary'
 
 const PatientDetails = (props) => {
     const {patient, auth, consultations, alarms, role} = props;
-    console.log(role);
     if (!auth.uid) return <Redirect to='/signin'/>;
     if (patient) {
         return (
             <div className='container mt-5'>
                 <div className='row'>
                     <div className='col-md-4 patient-details'>
-                        <h4>Personal info.</h4>
+                        <h4 className='patient-details-title'>Personal info.</h4>
                         <p className="font-weight-bold">{patient.firstName} {patient.lastName}</p>
                         <span className="font-weight-bold">Address</span>
                         <address>{patient.address}</address>
@@ -29,13 +28,13 @@ const PatientDetails = (props) => {
                             </div>
                             <div className="col-md-6">
                                 <span className='float-left font-weight-bold'>Heart max: </span>
-                                    {patient.heartMaxValue ? (<p>{patient.heartMaxValue}</p>) : (<p>to be set</p>)}
+                                {patient.heartMaxValue ? (<p>{patient.heartMaxValue}</p>) : (<p>to be set</p>)}
                             </div>
                         </div>
                         <div className='row'>
                             <div className="col-md-6">
                                 <span className='float-left font-weight-bold'>Temp min: </span>
-                                {patient.tempMinValue ? (<p>{patient.tempMinValue}</p>) : (<p>to be set</p>) }
+                                {patient.tempMinValue ? (<p>{patient.tempMinValue}</p>) : (<p>to be set</p>)}
 
                             </div>
                             <div className="col-md-6">
@@ -62,16 +61,28 @@ const PatientDetails = (props) => {
 
                         {role === 'admin' ? (
                             <div className='patient-details-buttons'>
-                                <Link to={'/update/patient/' + patient.id} className="card-link btn btn-primary">Update</Link>
+                                <Link to={'/update/patient/' + patient.id}
+                                      className="card-link btn btn-primary">Update</Link>
                                 <button className='btn btn-danger ml-2' onClick={() => props.deletePatient(patient)}>
                                     Delete user
                                 </button>
+                                <div className="btn-group mt-3" role="group" aria-label="First group">
+                                    <Link to={'/ekg/patient/' + patient.id}
+                                          className="card-link btn btn-secondary">Ekg</Link>
+                                    <Link to={'/pulse/patient/' + patient.id}
+                                          className="card-link btn btn-secondary">Pulse</Link>
+                                    <Link to={'/humidity/patient/' + patient.id}
+                                          className="card-link btn btn-secondary">Humidity</Link>
+                                    <Link to={'/temperature/patient/' + patient.id}
+                                          className="card-link btn btn-secondary">Temperature</Link>
+                                </div>
+
                             </div>
                         ) : null}
 
                     </div>
                     <div className="col-md-4 patient-consultations">
-                        <h4>Consultations</h4>
+                        <h4 className='patient-details-title'>Consultations</h4>
                         {role === 'admin' ? (
                             <Link to={'/createConsultation/' + patient.id} className='btn btn-primary '>Add
                                 consultation</Link>
@@ -79,19 +90,21 @@ const PatientDetails = (props) => {
                         <ConsultationsList consultations={consultations}/>
                     </div>
                     <div className='col-md-4 patient-alarms'>
-                        <h4>Alarms</h4>
-                        {alarms ? (
-                            alarms.map(alarm => {
-                                return (
-                                    <AlarmSummary patient={patient} alarm={alarm} key={alarm.id}/>
-                                )
-                            })
-                        ) : (
-                            <div className="spinner-border" role="status">
-                                <span className="sr-only">Loading...</span>
-                            </div>
-                        )}
-                        {alarms.length ? (null) : (<h5>No alarms yet</h5>)}
+                        <h4 className='patient-details-title'>Alarms</h4>
+                        <div className='alarms-list'>
+                            {alarms ? (
+                                alarms.map(alarm => {
+                                    return (
+                                        <AlarmSummary patient={patient} alarm={alarm} key={alarm.id}/>
+                                    )
+                                })
+                            ) : (
+                                <div className="spinner-border" role="status">
+                                    <span className="sr-only">Loading...</span>
+                                </div>
+                            )}
+                            {alarms.length ? (null) : (<h5>No alarms yet</h5>)}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -132,6 +145,18 @@ const mapStateToProps = (state, ownProps) => {
     if (patient && alarms) {
         patientAlarms = alarms.filter(alarm => {
             return alarm.userId === patient.id;
+        })
+    }
+
+    if (patientAlarms.length) {
+        patientAlarms.sort((alarm1, alarm2) => {
+            let comparison = 0;
+            if (alarm1.timestamp < alarm2.timestamp) {
+                comparison = 1;
+            } else if (alarm1.timestamp > alarm2.timestamp) {
+                comparison = -1;
+            }
+            return comparison;
         })
     }
 

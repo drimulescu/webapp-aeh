@@ -18,9 +18,9 @@ class PatientUpdate extends Component {
         e.preventDefault();
         // this.props.updatePatient(this.state);
         const patientId = this.props.patient.id;
-        this.setState({docId : patientId}, () => {
+        this.setState({docId: patientId}, () => {
             this.props.updatePatient(this.state).then((resp) => {
-                if(resp){
+                if (resp) {
                     this.props.history.push('/patient/' + patientId);
                 }
             });
@@ -31,79 +31,81 @@ class PatientUpdate extends Component {
         const {patient, updateError} = this.props;
         if (patient) {
             return (
-                <div className="container mt-5 border border-secondary">
-                    <form onSubmit={this.handleSubmit} className="p-5">
-                        <h3 className='mb-4'>Update patient</h3>
-                        <div className="form-group">
-                            <label htmlFor="firstName">First name</label>
-                            <input type="text" className="form-control" id="firstName" onChange={this.handleChange}
-                                   placeholder={patient.firstName}/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="lastName">Last name</label>
-                            <input type="text" className="form-control" id="lastName" onChange={this.handleChange}
-                                   placeholder={patient.lastName}/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="address">Address</label>
-                            <input type="text" className="form-control" id="address" onChange={this.handleChange}
-                                   placeholder={patient.address}/>
-                        </div>
-                        <div className='form-row'>
-                            <div className="form-group col-md-6">
-                                <label htmlFor="heartMinValue">Heart rate min</label>
-                                <input type="text" className="form-control" id="heartMinValue"
-                                       onChange={this.handleChange}
-                                       placeholder={patient.heartMinValue}/>
+                <div className="container mt-5">
+                    <div className='col-md-6 offset-md-3 border border-secondary patient-update-form'>
+                        <form onSubmit={this.handleSubmit} className="p-5">
+                            <h3 className='mb-4'>Update patient</h3>
+                            <div className="form-group">
+                                <label htmlFor="firstName">First name</label>
+                                <input type="text" className="form-control" id="firstName" onChange={this.handleChange}
+                                       placeholder={patient.firstName}/>
                             </div>
-                            <div className='form-group col-md-6'>
-                                <label htmlFor="heartMaxValue">Heart rate max</label>
-                                <input type="text" className="form-control" id="heartMaxValue"
-                                       onChange={this.handleChange}
-                                       placeholder={patient.heartMaxValue}/>
+                            <div className="form-group">
+                                <label htmlFor="lastName">Last name</label>
+                                <input type="text" className="form-control" id="lastName" onChange={this.handleChange}
+                                       placeholder={patient.lastName}/>
                             </div>
-                        </div>
-                        <div className='form-row'>
-                            <div className="form-group col-md-6">
-                                <label htmlFor="tempMinValue">Temperature min</label>
-                                <input type="text" className="form-control" id="tempMinValue"
-                                       onChange={this.handleChange}
-                                       placeholder={patient.tempMinValue}/>
+                            <div className="form-group">
+                                <label htmlFor="address">Address</label>
+                                <input type="text" className="form-control" id="address" onChange={this.handleChange}
+                                       placeholder={patient.address}/>
                             </div>
-                            <div className='form-group col-md-6'>
-                                <label htmlFor="tempMaxValue">Temperature max</label>
-                                <input type="text" className="form-control" id="tempMaxValue"
-                                       onChange={this.handleChange}
-                                       placeholder={patient.tempMaxValue}/>
+                            <div className='form-row'>
+                                <div className="form-group col-md-6">
+                                    <label htmlFor="heartMinValue">Heart rate min</label>
+                                    <input type="text" className="form-control" id="heartMinValue"
+                                           onChange={this.handleChange}
+                                           placeholder={patient.heartMinValue}/>
+                                </div>
+                                <div className='form-group col-md-6'>
+                                    <label htmlFor="heartMaxValue">Heart rate max</label>
+                                    <input type="text" className="form-control" id="heartMaxValue"
+                                           onChange={this.handleChange}
+                                           placeholder={patient.heartMaxValue}/>
+                                </div>
                             </div>
-                        </div>
-                        <div className='form-row'>
-                            <div className="form-group col-md-6">
-                                <label htmlFor="humidityMinValue">Humidity min</label>
-                                <input type="text" className="form-control" id="humidityMinValue"
-                                       onChange={this.handleChange}
-                                       placeholder={patient.humidityMinValue}/>
+                            <div className='form-row'>
+                                <div className="form-group col-md-6">
+                                    <label htmlFor="tempMinValue">Temperature min</label>
+                                    <input type="text" className="form-control" id="tempMinValue"
+                                           onChange={this.handleChange}
+                                           placeholder={patient.tempMinValue}/>
+                                </div>
+                                <div className='form-group col-md-6'>
+                                    <label htmlFor="tempMaxValue">Temperature max</label>
+                                    <input type="text" className="form-control" id="tempMaxValue"
+                                           onChange={this.handleChange}
+                                           placeholder={patient.tempMaxValue}/>
+                                </div>
                             </div>
-                            <div className='form-group col-md-6'>
-                                <label htmlFor="humidityMaxValue">Humidity max</label>
-                                <input type="text" className="form-control" id="humidityMaxValue"
-                                       onChange={this.handleChange}
-                                       placeholder={patient.humidityMaxValue}/>
+                            <div className='form-row'>
+                                <div className="form-group col-md-6">
+                                    <label htmlFor="humidityMinValue">Humidity min</label>
+                                    <input type="text" className="form-control" id="humidityMinValue"
+                                           onChange={this.handleChange}
+                                           placeholder={patient.humidityMinValue}/>
+                                </div>
+                                <div className='form-group col-md-6'>
+                                    <label htmlFor="humidityMaxValue">Humidity max</label>
+                                    <input type="text" className="form-control" id="humidityMaxValue"
+                                           onChange={this.handleChange}
+                                           placeholder={patient.humidityMaxValue}/>
+                                </div>
                             </div>
-                        </div>
-                        <div className='form-group'>
-                            <label htmlFor="recommendations">Activity recommendation</label>
-                            <textarea type="text" className="form-control" id="recommendations"
-                                      onChange={this.handleChange}
-                                      placeholder={patient.recommendations}/>
-                        </div>
+                            <div className='form-group'>
+                                <label htmlFor="recommendations">Activity recommendation</label>
+                                <textarea type="text" className="form-control" id="recommendations"
+                                          onChange={this.handleChange}
+                                          placeholder={patient.recommendations}/>
+                            </div>
 
-                        <div className='text-center'>
-                            {updateError ? <p className='alert alert-danger mt-2'>{updateError}</p> : null}
-                        </div>
-                        <button type="submit" className="btn btn-primary">Submit</button>
-                        <Link to={'/patient/' + patient.id} className='btn btn-danger ml-2'>Cancel</Link>
-                    </form>
+                            <div className='text-center'>
+                                {updateError ? <p className='alert alert-danger mt-2'>{updateError}</p> : null}
+                            </div>
+                            <button type="submit" className="btn btn-primary">Submit</button>
+                            <Link to={'/patient/' + patient.id} className='btn btn-danger ml-2'>Cancel</Link>
+                        </form>
+                    </div>
                 </div>
             )
         } else {
@@ -136,7 +138,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 export default compose(
-    connect(mapStateToProps,mapDispatchToProps),
+    connect(mapStateToProps, mapDispatchToProps),
     firestoreConnect([
         {collection: 'patients'},
     ]))(PatientUpdate)

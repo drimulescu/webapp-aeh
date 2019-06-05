@@ -11,6 +11,10 @@ import CreateConsultation from "./components/consultations/CreateConsultation";
 import ConsultationDetails from "./components/consultations/ConsultationDetails";
 import AlarmsList from './components/alarms/AlarmsList'
 import AlarmPopup from "./components/alarms/AlarmPopup";
+import Humidity from "./components/charts/Humidity"
+import Temperature from "./components/charts/Temperature"
+import Pulse from "./components/charts/Pulse"
+import Ekg from "./components/charts/Ekg"
 
 class App extends Component {
     render() {
@@ -29,6 +33,11 @@ class App extends Component {
                         <Route path='/createConsultation/:id' component={CreateConsultation}/>
                         <Route path='/consultation/:id' component={ConsultationDetails}/>
                         <Route path='/alarms' component={AlarmsList}/>
+                        <Route path='/humidity/patient/:id' component={Humidity}/>
+                        <Route path='/temperature/patient/:id' component={Temperature}/>
+                        <Route path='/pulse/patient/:id' component={Pulse}/>
+                        <Route path='/ekg/patient/:id' component={Ekg}/>
+
                     </Switch>
                 </div>
             </BrowserRouter>

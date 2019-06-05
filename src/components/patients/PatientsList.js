@@ -12,6 +12,7 @@ const PatientsList = ({patients}) => {
                 )
             })
             }
+            {patients.length ? null : (<h3>No patients yet</h3>)}
         </div>
     )
 };

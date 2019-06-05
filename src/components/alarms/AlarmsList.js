@@ -15,9 +15,13 @@ const AlarmsList = ({alarms, patients, auth, role}) => {
                 {alarms && patients ? (
                     alarms.map(alarm => {
                         const patient = getPatientWithId(patients,alarm.userId);
-                        return (
-                            <AlarmSummary patient={patient} alarm={alarm} key={alarm.id}/>
-                        )
+                        if(typeof patient !== 'undefined'){
+                            return (
+                                <AlarmSummary patient={patient} alarm={alarm} key={alarm.id}/>
+                            )
+                        } else {
+                            return null;
+                        }
                     })
                     ) : (
                         <div className="spinner-border" role="status">
@@ -31,7 +35,9 @@ const AlarmsList = ({alarms, patients, auth, role}) => {
 };
 
 function getPatientWithId (patients,id) {
-    return patients && patients.find(patient => patient.id === id)
+    let patient =  patients && patients.find(patient => patient.id === id);
+    console.log(patient,id);
+    return patient;
 }
 
 const mapStateToProps = (state) => {
@@ -43,8 +49,23 @@ const mapStateToProps = (state) => {
             return patient.doctorId === authId;
         })
     }
+    const alarms = state.firestore.ordered.alarms;
+    let sortedAlarms=[];
+    console.log(alarms);
+    if(alarms){
+        sortedAlarms = alarms.sort((alarm1, alarm2) => {
+            let comparison = 0;
+            if (alarm1.timestamp < alarm2.timestamp) {
+                comparison = 1;
+            } else if (alarm1.timestamp > alarm2.timestamp) {
+                comparison = -1;
+            }
+            return comparison;
+        })
+    }
+
     return {
-        alarms: state.firestore.ordered.alarms,
+        alarms: sortedAlarms,
         patients: filteredPatients,
         auth: state.firebase.auth,
         role: state.firebase.profile.role

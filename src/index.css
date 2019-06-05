@@ -36,7 +36,20 @@
     overflow-y: auto;
 }
 
-.patient-alarms {
-    max-height: 75vh;
+.alarms-list {
+    max-height: 80vh;
     overflow-y: auto;
+}
+
+.patient-list .card-body,
+.patient-update-form,
+.create-patient-form {
+    box-shadow: 5px 5px 5px grey;
+}
+
+.patient-details-title {
+    margin-bottom: 20px;
+    border-bottom: 1px solid gray;
+    text-align: center;
+    margin-top: 20px;
 }

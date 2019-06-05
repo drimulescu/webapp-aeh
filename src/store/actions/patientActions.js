@@ -11,6 +11,7 @@ export const createPatient = (patient) => {
             return firestore.collection('users').doc(resp.user.uid).set({
                 role: 'user'
             }).then(() => {
+                delete patient.password;
                 return firestore.collection('patients').doc(resp.user.uid).set({
                     ...patient
                 });
