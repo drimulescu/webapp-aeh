@@ -8,18 +8,22 @@ const AlarmPopup = (props) => {
     const {alarms, patients} = props;
     if (alarms.length) {
         return (
-            <div className='alarm-popup'>
-                {alarms && patients && alarms.map(alarm => {
-                    const patient = patients.find(patient => patient.id === alarm.userId);
+            alarms && patients && alarms.map(alarm => {
+                const patient = patients.find(patient => patient.id === alarm.userId);
+                if (patient) {
                     return (
-                        <AlarmSummary patient={patient} alarm={alarm} displayCloseBtn={true} key={alarm.id}/>
+                        <div className='alarm-popup'>
+                            <AlarmSummary patient={patient} alarm={alarm} displayCloseBtn={true} key={alarm.id}/>
+                        </div>
                     )
-                })}
-            </div>
+                } else {
+                    return null;
+                }
+            })
         )
     } else {
-        return null
-        }
+        return null;
+    }
 };
 
 const mapStateToProps = (state) => {
@@ -34,7 +38,7 @@ const mapStateToProps = (state) => {
 
     let alarmsToDisplay = [];
     const alarms = state.firestore.ordered.alarms;
-    if(alarms){
+    if (alarms) {
         alarmsToDisplay = alarms.filter(alarm => {
             return alarm.viewed === false;
         })
@@ -44,7 +48,6 @@ const mapStateToProps = (state) => {
         alarms: alarmsToDisplay
     }
 };
-
 
 
 export default compose(
