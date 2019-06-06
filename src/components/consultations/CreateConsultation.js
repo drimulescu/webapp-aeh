@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {createConsultation} from "../../store/actions/consultationActions";
+import {Link} from "react-router-dom";
 
 class CreateConsultation extends Component {
 
@@ -60,6 +61,7 @@ class CreateConsultation extends Component {
                         {createError ? <p className='alert alert-danger mt-2'>{createError}</p> : null}
                     </div>
                     <button type="submit" className="btn btn-primary">Submit</button>
+                    <Link to={'/patient/' + this.props.patientId} className='btn btn-danger ml-2'>Cancel</Link>
                 </form>
             </div>
         )

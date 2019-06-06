@@ -14,6 +14,15 @@ class PatientUpdate extends Component {
         })
     };
 
+    handleNumberChange = (e) => {
+        if(e.target.value > 1000) {
+            e.target.value = 1000;
+        }
+        this.setState({
+            [e.target.id]: e.target.value
+        })
+    };
+
     handleSubmit = (e) => {
         e.preventDefault();
         // this.props.updatePatient(this.state);
@@ -53,49 +62,62 @@ class PatientUpdate extends Component {
                             <div className='form-row'>
                                 <div className="form-group col-md-6">
                                     <label htmlFor="heartMinValue">Heart rate min</label>
-                                    <input type="text" className="form-control" id="heartMinValue"
-                                           onChange={this.handleChange}
+                                    <input type="number" className="form-control" id="heartMinValue"
+                                           onChange={this.handleNumberChange}
+                                           autoComplete='off'
+                                           min='0'
                                            placeholder={patient.heartMinValue}/>
                                 </div>
                                 <div className='form-group col-md-6'>
                                     <label htmlFor="heartMaxValue">Heart rate max</label>
-                                    <input type="text" className="form-control" id="heartMaxValue"
-                                           onChange={this.handleChange}
+                                    <input type="number" className="form-control" id="heartMaxValue"
+                                           onChange={this.handleNumberChange}
+                                           autoComplete='off'
+                                           min='0'
+                                           max='1000'
                                            placeholder={patient.heartMaxValue}/>
                                 </div>
                             </div>
                             <div className='form-row'>
                                 <div className="form-group col-md-6">
                                     <label htmlFor="tempMinValue">Temperature min</label>
-                                    <input type="text" className="form-control" id="tempMinValue"
-                                           onChange={this.handleChange}
+                                    <input type="number" className="form-control" id="tempMinValue"
+                                           onChange={this.handleNumberChange}
+                                           autoComplete='off'
+                                           min='0'
                                            placeholder={patient.tempMinValue}/>
                                 </div>
                                 <div className='form-group col-md-6'>
                                     <label htmlFor="tempMaxValue">Temperature max</label>
-                                    <input type="text" className="form-control" id="tempMaxValue"
-                                           onChange={this.handleChange}
+                                    <input type="number" className="form-control" id="tempMaxValue"
+                                           onChange={this.handleNumberChange}
+                                           autoComplete='off'
+                                           min='0'
                                            placeholder={patient.tempMaxValue}/>
                                 </div>
                             </div>
                             <div className='form-row'>
                                 <div className="form-group col-md-6">
                                     <label htmlFor="humidityMinValue">Humidity min</label>
-                                    <input type="text" className="form-control" id="humidityMinValue"
-                                           onChange={this.handleChange}
+                                    <input type="number" className="form-control" id="humidityMinValue"
+                                           onChange={this.handleNumberChange}
+                                           autoComplete='off'
+                                           min='0'
                                            placeholder={patient.humidityMinValue}/>
                                 </div>
                                 <div className='form-group col-md-6'>
                                     <label htmlFor="humidityMaxValue">Humidity max</label>
-                                    <input type="text" className="form-control" id="humidityMaxValue"
-                                           onChange={this.handleChange}
+                                    <input type="number" className="form-control" id="humidityMaxValue"
+                                           onChange={this.handleNumberChange}
+                                           autoComplete='off'
+                                           min='0'
                                            placeholder={patient.humidityMaxValue}/>
                                 </div>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor="recommendations">Activity recommendation</label>
                                 <textarea type="text" className="form-control" id="recommendations"
-                                          onChange={this.handleChange}
+                                          onChange={this.handleNumberChange}
                                           placeholder={patient.recommendations}/>
                             </div>
 
